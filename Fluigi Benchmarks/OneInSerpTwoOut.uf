@@ -1,0 +1,26 @@
+# .uf output by muShroomMapper
+3D DEVICE OneInSerpTwoOut
+
+LAYER FLOW
+
+
+PORT flowInPort0,outPort0,outPort1 r=2020;
+
+H MIXER fDevice0_SerpMixer numBends=5 bendSpacing=1000 bendLength=2000 channelWidth=1000;
+V TREE fDevice1_SplitTree 1 to 2 spacing=10000 flowChannelWidth=1000;
+
+
+CHANNEL flowChannel0 from flowInPort0 2 to fDevice0_SerpMixer 1 w=1000;
+CHANNEL flowchannel1 from fDevice1_SplitTree 2 to outPort0 4 w=1000;
+CHANNEL flowchannel2 from fDevice1_SplitTree 3 to outPort1 4 w=1000;
+CHANNEL flowchannel3 from fDevice0_SerpMixer 2 to fDevice1_SplitTree 1 w=1000;
+
+
+END LAYER
+
+LAYER CONTROL
+
+
+
+
+END LAYER

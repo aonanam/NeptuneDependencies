@@ -1,0 +1,38 @@
+# .uf output by muShroomMapper
+3D DEVICE OneInValveSerpValveTrapFourOut
+
+LAYER FLOW
+
+
+PORT flowInPort0,outPort0,outPort1,outPort2,outPort3 r=2020;
+
+H MIXER fDevice0_SerpMixer numBends=5 bendSpacing=1000 bendLength=2000 channelWidth=1000;
+H LONG CELL TRAP fDevice1_CellTrap numChambers=6 chamberWidth=1000 chamberLength=1000 chamberSpacing=1000 channelWidth=1000;
+V TREE fDevice2_SplitTree 1 to 4 spacing=10000 flowChannelWidth=1000;
+
+H 3DVALVE cDevice0_3DValve radius=2000 gap=1000;
+H 3DVALVE cDevice1_3DValve radius=2000 gap=1000;
+
+CHANNEL flowChannel0 from flowInPort0 2 to cDevice0_3DValve 4 w=1000;
+CHANNEL flowchannel1 from fDevice2_SplitTree 2 to outPort0 4 w=1000;
+CHANNEL flowchannel2 from fDevice2_SplitTree 3 to outPort1 4 w=1000;
+CHANNEL flowchannel3 from fDevice2_SplitTree 4 to outPort2 4 w=1000;
+CHANNEL flowchannel4 from fDevice2_SplitTree 5 to outPort3 4 w=1000;
+CHANNEL flowChannel5 from cDevice0_3DValve 2 to fDevice0_SerpMixer 1 w=1000;
+CHANNEL flowChannel6 from fDevice0_SerpMixer 2 to cDevice1_3DValve 4 w=1000;
+CHANNEL flowChannel7 from cDevice1_3DValve 2 to fDevice1_CellTrap 1 w=1000;
+CHANNEL flowchannel8 from fDevice1_CellTrap 2 to fDevice2_SplitTree 1 w=1000;
+
+
+END LAYER
+
+LAYER CONTROL
+
+
+PORT controlInPort0,controlInPort1 r=2020;
+
+CHANNEL controlChannel0 from controlInPort0 1 to cDevice0_3DValve 3 w=1000;
+CHANNEL controlChannel1 from controlInPort1 3 to cDevice1_3DValve 1 w=1000;
+
+
+END LAYER
